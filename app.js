@@ -1,4 +1,10 @@
-const display = document.getElementById('display');
+let display;
+
+function init() {
+    display = document.getElementById('display');
+}
+
+window.addEventListener('DOMContentLoaded', init);
 
 function append(val) {
     display.value += val;
@@ -14,7 +20,7 @@ function backspace() {
 
 function calculate() {
     try {
-        display.value = eval(
+                display.value = eval(
             display.value
                 .replace(/÷/g, '/')
                 .replace(/×/g, '*')
