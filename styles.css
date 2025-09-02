@@ -2,42 +2,43 @@
     /* Colors */
     --bg-gradient-start: #232526;
     --bg-gradient-end: #414345;
-    --display-bg: rgba(255,255,255,0.08);
+    --display-bg: rgba(0,0,0,0.85);
     --display-text: #fff;
-    --button-main-gradient-start: #f7b733;
-    --button-main-gradient-end: #fc4a1a;
-    --button-func-gradient-start: #43cea2;
-    --button-func-gradient-end: #185a9d;
-    --button-equal-gradient-start: #f7971e;
-    --button-equal-gradient-end: #ffd200;
-    --button-equal-text: #232526;
-    --button-shadow-main: rgba(252,74,26,0.15);
-    --button-shadow-func: rgba(24,90,157,0.15);
+    
+    /* Button Categories */
+    --number-bg: linear-gradient(135deg, #283E51 0%, #485563 100%);
+    --operator-bg: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+    --function-bg: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    --trig-bg: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+    --clear-bg: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+    --equals-bg: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+    
+    /* Button Hover States */
+    --number-hover: linear-gradient(135deg, #8f94fb 0%, #4e54c8 100%);
+    --operator-hover: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+    --function-hover: linear-gradient(135deg, #185a9d 0%, #43cea2 100%);
+    --trig-hover: linear-gradient(135deg, #4A00E0 0%, #8E2DE2 100%);
+    --clear-hover: linear-gradient(135deg, #FF4B2B 0%, #FF416C 100%);
+    
+    /* Text Colors */
+    --button-text-light: #fff;
+    --button-text-dark: #232526;
+    
+    /* Shadows */
+    --number-shadow: rgba(40,62,81,0.18);
+    --operator-shadow: rgba(221,36,118,0.18);
+    --function-shadow: rgba(24,90,157,0.18);
+    --trig-shadow: rgba(142,45,226,0.18);
+    --clear-shadow: rgba(255,65,108,0.18);
+    --equals-shadow: rgba(247,151,30,0.18);
 
     /* Spacing & Sizing */
     --calculator-width: 370px;
     --calculator-radius: 28px;
     --calculator-padding: 24px 18px 18px 18px;
-    --display-height: 60px;
-    --display-radius: 12px;
-    --display-padding: 12px;
-    --button-radius: 50%;
-    --button-padding: 18px 0;
-    --button-font-size: 1.15em;
-    --button-wide-radius: 28px;
     --button-gap: 12px;
-    --box-shadow: 0 8px 32px rgba(0,0,0,0.45);
-
-    /* Responsive */
-    --calculator-radius-mobile: 18px;
-    --calculator-padding-mobile: 12px 4px 8px 4px;
-    --display-height-mobile: 44px;
-    --display-radius-mobile: 8px;
-    --display-padding-mobile: 8px;
-    --button-radius-mobile: 20px;
-    --button-padding-mobile: 12px 0;
-    --button-font-size-mobile: 1em;
-    --button-gap-mobile: 7px;
+    --button-radius: 50%;
+    --button-wide-radius: 28px;
 }
 
 *,
@@ -63,109 +64,163 @@ body {
     padding: var(--calculator-padding);
     background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     border-radius: var(--calculator-radius);
-    box-shadow: var(--box-shadow);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+}
+
+.screen-container {
+    background: var(--display-bg);
+    border-radius: 16px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    padding: 8px 12px;
 }
 
 .display {
-    width: 100%;
-    height: var(--display-height);
-    font-size: 2.2em;
-    text-align: right;
-    margin-bottom: 18px;
-    padding: var(--display-padding);
-    border: none;
-    border-radius: var(--display-radius);
-    background: var(--display-bg);
+    background: transparent;
     color: var(--display-text);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 2.4em;
+    border: none;
+    width: 100%;
+    text-align: right;
+    padding: 0;
     outline: none;
+    box-shadow: none;
+    letter-spacing: 2px;
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+/* Allow button rows to wrap if needed */
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--button-gap);
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 button {
-    padding: var(--button-padding);
-    font-size: var(--button-font-size);
+    flex: 1 1 48px;
+    min-width: 48px;
+    max-width: 80px;
+    margin: 0;
+    padding: 18px 0;
+    font-size: 1.15em;
     border: none;
     border-radius: var(--button-radius);
-    background: linear-gradient(135deg, var(--button-main-gradient-start) 0%, var(--button-main-gradient-end) 100%);
-    color: #fff;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 2px 8px var(--button-shadow-main);
     transition: background 0.2s, transform 0.1s;
+    outline: none;
+    box-sizing: border-box;
 }
 
+/* Wide buttons (0 and =) */
+button.wide {
+    flex: 2 1 100px;
+    min-width: 100px;
+    border-radius: var(--button-wide-radius);
+}
+
+/* Number Buttons */
+button[onclick*="'0'"],
+button[onclick*="'1'"],
+button[onclick*="'2'"],
+button[onclick*="'3'"],
+button[onclick*="'4'"],
+button[onclick*="'5'"],
+button[onclick*="'6'"],
+button[onclick*="'7'"],
+button[onclick*="'8'"],
+button[onclick*="'9'"] {
+    background: var(--number-bg);
+    color: var(--button-text-light);
+    box-shadow: 0 2px 8px var(--number-shadow);
+}
+
+/* Operator Buttons: + - × ÷ */
+button.op,
+button[onclick*="'/'"] {
+    background: var(--operator-bg);
+    color: var(--button-text-light);
+    box-shadow: 0 2px 8px var(--operator-shadow);
+}
+
+/* Function Buttons: sqrt, log, xʸ */
+button[onclick*="'sqrt'"],
+button[onclick*="'^'"],
+button[onclick*="'log'"] {
+    background: var(--function-bg);
+    color: var(--button-text-light);
+    box-shadow: 0 2px 8px var(--function-shadow);
+}
+
+/* Trig Buttons: sin, cos, tan */
+button[onclick*="'sin'"],
+button[onclick*="'cos'"],
+button[onclick*="'tan'"] {
+    background: var(--trig-bg);
+    color: var(--button-text-light);
+    box-shadow: 0 2px 8px var(--trig-shadow);
+}
+
+/* Clear and Backspace */
+button[onclick*="clearDisplay"],
+button[onclick*="backspace"] {
+    background: var(--clear-bg);
+    color: var(--button-text-light);
+    box-shadow: 0 2px 8px var(--clear-shadow);
+}
+
+/* Parentheses and decimal */
+button[onclick*="'('"],
+button[onclick*="')'"],
+button[onclick*="'."] {
+    background: var(--number-bg);
+    color: var(--button-text-light);
+    box-shadow: 0 2px 8px var(--number-shadow);
+}
+
+/* Equals Button */
+button.equal,
+button.wide:last-of-type {
+    background: var(--equals-bg);
+    color: var(--button-text-dark);
+    font-weight: 700;
+    box-shadow: 0 2px 8px var(--equals-shadow);
+    border-radius: var(--button-wide-radius);
+}
+
+/* Button hover effect */
 button:hover {
-    background: linear-gradient(135deg, var(--button-main-gradient-end) 0%, var(--button-main-gradient-start) 100%);
+    filter: brightness(1.15);
     transform: scale(1.07);
 }
 
 button:active {
-    background: linear-gradient(135deg, var(--button-main-gradient-start) 0%, var(--button-main-gradient-end) 100%);
+    filter: brightness(0.95);
     transform: scale(0.97);
-}
-
-button.wide {
-    grid-column: span 2;
-    border-radius: var(--button-wide-radius);
-    padding: var(--button-padding);
-}
-
-button:nth-child(1), /* C */
-button:nth-child(2), /* ← */
-button:nth-child(3), /* ( */
-button:nth-child(4), /* ) */
-button:nth-child(5), /* ÷ */
-button:nth-child(10), /* √ */
-button:nth-child(15), /* xʸ */
-button:nth-child(20), /* log */
-button:nth-child(24), /* sin */
-button:nth-child(25), /* cos */
-button:nth-child(26)  /* tan */ {
-    background: linear-gradient(135deg, var(--button-func-gradient-start) 0%, var(--button-func-gradient-end) 100%);
-    color: #fff;
-    box-shadow: 0 2px 8px var(--button-shadow-func);
-}
-
-button:nth-child(5),
-button:nth-child(10),
-button:nth-child(15),
-button:nth-child(20),
-button:nth-child(24),
-button:nth-child(25),
-button:nth-child(26) {
-    font-weight: 700;
-}
-
-button.wide:last-of-type {
-    background: linear-gradient(135deg, var(--button-equal-gradient-start) 0%, var(--button-equal-gradient-end) 100%);
-    color: var(--button-equal-text);
-    font-weight: 700;
 }
 
 @media (max-width: 500px) {
     .calculator {
         max-width: 98vw;
-        padding: var(--calculator-padding-mobile);
-        border-radius: var(--calculator-radius-mobile);
+        padding: 12px 4px 8px 4px;
+        border-radius: 18px;
+    }
+    .screen-container {
+        padding: 4px 6px;
+        border-radius: 10px;
     }
     .display {
         font-size: 1.3em;
-        height: var(--display-height-mobile);
-        padding: var(--display-padding-mobile);
-        border-radius: var(--display-radius-mobile);
+        letter-spacing: 1px;
     }
-    .buttons {
-        gap: var(--button-gap-mobile);
+    .button-row {
+        gap: 7px;
+        margin-bottom: 7px;
     }
     button, button.wide {
-        padding: var(--button-padding-mobile);
-        font-size: var(--button-font-size-mobile);
-        border-radius: var(--button-radius-mobile);
+        padding: 12px 0;
+        font-size: 1em;
+        border-radius: 20px;
     }
 }
