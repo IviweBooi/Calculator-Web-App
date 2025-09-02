@@ -1,0 +1,171 @@
+:root {
+    /* Colors */
+    --bg-gradient-start: #232526;
+    --bg-gradient-end: #414345;
+    --display-bg: rgba(255,255,255,0.08);
+    --display-text: #fff;
+    --button-main-gradient-start: #f7b733;
+    --button-main-gradient-end: #fc4a1a;
+    --button-func-gradient-start: #43cea2;
+    --button-func-gradient-end: #185a9d;
+    --button-equal-gradient-start: #f7971e;
+    --button-equal-gradient-end: #ffd200;
+    --button-equal-text: #232526;
+    --button-shadow-main: rgba(252,74,26,0.15);
+    --button-shadow-func: rgba(24,90,157,0.15);
+
+    /* Spacing & Sizing */
+    --calculator-width: 370px;
+    --calculator-radius: 28px;
+    --calculator-padding: 24px 18px 18px 18px;
+    --display-height: 60px;
+    --display-radius: 12px;
+    --display-padding: 12px;
+    --button-radius: 50%;
+    --button-padding: 18px 0;
+    --button-font-size: 1.15em;
+    --button-wide-radius: 28px;
+    --button-gap: 12px;
+    --box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+
+    /* Responsive */
+    --calculator-radius-mobile: 18px;
+    --calculator-padding-mobile: 12px 4px 8px 4px;
+    --display-height-mobile: 44px;
+    --display-radius-mobile: 8px;
+    --display-padding-mobile: 8px;
+    --button-radius-mobile: 20px;
+    --button-padding-mobile: 12px 0;
+    --button-font-size-mobile: 1em;
+    --button-gap-mobile: 7px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Pro Display', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    width: 100%;
+    max-width: var(--calculator-width);
+    margin: 20px;
+    padding: var(--calculator-padding);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    border-radius: var(--calculator-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.display {
+    width: 100%;
+    height: var(--display-height);
+    font-size: 2.2em;
+    text-align: right;
+    margin-bottom: 18px;
+    padding: var(--display-padding);
+    border: none;
+    border-radius: var(--display-radius);
+    background: var(--display-bg);
+    color: var(--display-text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    outline: none;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--button-gap);
+}
+
+button {
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    border: none;
+    border-radius: var(--button-radius);
+    background: linear-gradient(135deg, var(--button-main-gradient-start) 0%, var(--button-main-gradient-end) 100%);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--button-shadow-main);
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, var(--button-main-gradient-end) 0%, var(--button-main-gradient-start) 100%);
+    transform: scale(1.07);
+}
+
+button:active {
+    background: linear-gradient(135deg, var(--button-main-gradient-start) 0%, var(--button-main-gradient-end) 100%);
+    transform: scale(0.97);
+}
+
+button.wide {
+    grid-column: span 2;
+    border-radius: var(--button-wide-radius);
+    padding: var(--button-padding);
+}
+
+button:nth-child(1), /* C */
+button:nth-child(2), /* ← */
+button:nth-child(3), /* ( */
+button:nth-child(4), /* ) */
+button:nth-child(5), /* ÷ */
+button:nth-child(10), /* √ */
+button:nth-child(15), /* xʸ */
+button:nth-child(20), /* log */
+button:nth-child(24), /* sin */
+button:nth-child(25), /* cos */
+button:nth-child(26)  /* tan */ {
+    background: linear-gradient(135deg, var(--button-func-gradient-start) 0%, var(--button-func-gradient-end) 100%);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--button-shadow-func);
+}
+
+button:nth-child(5),
+button:nth-child(10),
+button:nth-child(15),
+button:nth-child(20),
+button:nth-child(24),
+button:nth-child(25),
+button:nth-child(26) {
+    font-weight: 700;
+}
+
+button.wide:last-of-type {
+    background: linear-gradient(135deg, var(--button-equal-gradient-start) 0%, var(--button-equal-gradient-end) 100%);
+    color: var(--button-equal-text);
+    font-weight: 700;
+}
+
+@media (max-width: 500px) {
+    .calculator {
+        max-width: 98vw;
+        padding: var(--calculator-padding-mobile);
+        border-radius: var(--calculator-radius-mobile);
+    }
+    .display {
+        font-size: 1.3em;
+        height: var(--display-height-mobile);
+        padding: var(--display-padding-mobile);
+        border-radius: var(--display-radius-mobile);
+    }
+    .buttons {
+        gap: var(--button-gap-mobile);
+    }
+    button, button.wide {
+        padding: var(--button-padding-mobile);
+        font-size: var(--button-font-size-mobile);
+        border-radius: var(--button-radius-mobile);
+    }
+}
